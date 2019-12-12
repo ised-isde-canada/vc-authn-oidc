@@ -92,11 +92,14 @@ namespace VCAuthn.IdentityServer.Endpoints
             var redirectUrl = values.Get(IdentityConstants.RedirectUriParameterName);
             if (string.IsNullOrEmpty(redirectUrl))
             {
+            	  _logger.LogError(e, "No red url 1");
                 return VCResponseHelpers.Error(IdentityConstants.InvalidRedirectUriError);
             }
 
             if (clientResult.Client.RedirectUris.Any() && !clientResult.Client.RedirectUris.Contains(redirectUrl))
+            
             {
+              _logger.LogError(e, "No red url 2");
                 return VCResponseHelpers.Error(IdentityConstants.InvalidRedirectUriError);
             }
 
