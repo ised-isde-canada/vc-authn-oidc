@@ -16,7 +16,7 @@ namespace VCAuthn.IdentityServer
         public static readonly string InvalidPresentationRequestConfigIDDesc = $"Missing {PresentationRequestConfigIDParamName} param";
 
         public const string RedirectUriParameterName = "redirect_uri";
-        public const string InvalidRedirectUriError = "invalid_redirect_uri";
+        public const string InvalidRedirectUriError = "invalid_redirect_uri_ised_test";
         
         public const string GrantTypeParameterName = "grant_type";
         public const string InvalidGrantTypeError = "invalid_grant_type";
