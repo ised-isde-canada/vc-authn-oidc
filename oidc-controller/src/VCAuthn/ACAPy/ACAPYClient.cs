@@ -48,11 +48,11 @@ namespace VCAuthn.ACAPY
 
         public async Task<WalletPublicDid> WalletDidPublic()
         {
+         _logger.LogDebug("This is the admin url" +  _adminUrl);
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri($"{_adminUrl}{ACAPYConstants.WalletDidPublicUri}")
-                  _logger.LogDebug("This is the request URI" +  RequestUri);
             };
 
             if (!string.IsNullOrEmpty(_adminUrlApiKey))
