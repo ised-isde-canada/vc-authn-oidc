@@ -53,6 +53,8 @@ namespace VCAuthn.IdentityServer.Endpoints
         public async Task<IEndpointResult> ProcessAsync(HttpContext context)
         {
             _logger.LogDebug("Processing Authorize request");
+            
+           _logger.LogDebug("Processing Authorize request for" + HttpContext.Current.Request.Url.AbsoluteUri);
 
             NameValueCollection values;
             switch (context.Request.Method)
