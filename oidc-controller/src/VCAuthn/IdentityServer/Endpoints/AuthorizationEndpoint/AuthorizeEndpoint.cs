@@ -100,7 +100,7 @@ namespace VCAuthn.IdentityServer.Endpoints
             
             {
               _logger.LogDebug("this is the clientResult" + clientResult.Client.ToString());
-              foreach(var item in yourArray)
+              foreach(var item in clientResult.Client.RedirectUris)
               {
                 
                   _logger.LogDebug("this is the url " + item.ToString());
