@@ -54,7 +54,7 @@ namespace VCAuthn.IdentityServer.Endpoints
         {
             _logger.LogDebug("Processing Authorize request");
             
-           _logger.LogDebug("Processing Authorize request for" + context.Current.Request.Url.AbsoluteUri);
+           _logger.LogDebug("Processing Authorize request for" + context.Request.RawUrl);
 
             NameValueCollection values;
             switch (context.Request.Method)
