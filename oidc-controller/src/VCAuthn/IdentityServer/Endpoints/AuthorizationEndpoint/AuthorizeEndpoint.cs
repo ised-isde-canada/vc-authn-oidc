@@ -99,7 +99,8 @@ namespace VCAuthn.IdentityServer.Endpoints
             if (clientResult.Client.RedirectUris.Any() && !clientResult.Client.RedirectUris.Contains(redirectUrl))
             
             {
-              _logger.LogDebug("this is the clientResult" + clientResult.Client.ToString());
+              _logger.LogDebug("this is the redirectURL" + redirectUrl);
+            
               foreach(var item in clientResult.Client.RedirectUris)
               {
                 
