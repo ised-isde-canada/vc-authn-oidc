@@ -136,19 +136,7 @@ configureEnvironment() {
   export POSTGRESQL_WALLET_ADMIN_USER="postgres"
   export POSTGRESQL_WALLET_ADMIN_PASSWORD="mysecretpassword"
 
-  # keycloak-db
-  export KEYCLOAK_DB_NAME="keycloak"
-  export KEYCLOAK_DB_USER="keycloak"
-  export KEYCLOAK_DB_PASSWORD="keycloak"
-
-  # keycloak
-  export KEYCLOAK_DB_VENDOR="POSTGRES"
-  export KEYCLOAK_DB_ADDR="keycloak-db"
-  export KEYCLOAK_USER="admin"
-  export KEYCLOAK_PASSWORD="admin"
-  export KEYCLOAK_IMPORT="/tmp/master.json"
-  export KEYCLOAK_LOGLEVEL="WARN"
-  export KEYCLOAK_ROOT_LOGLEVEL="WARN"
+  
 }
 
 getStartupParams() {

@@ -15,38 +15,7 @@ services:
     volumes:
       - controller-db-data:/var/lib/pgsql/data
 
-  keycloak:
-    image: jboss/keycloak:7.0.0
-    ports:
-      - 8180:8080
-    volumes:
-      - ./keycloak/config:/tmp
-    environment:
-      DB_VENDOR: ${KEYCLOAK_DB_VENDOR}
-      DB_ADDR: ${KEYCLOAK_DB_ADDR}
-      DB_DATABASE: ${KEYCLOAK_DB_NAME}
-      DB_USER: ${KEYCLOAK_DB_USER}
-      DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
-      KEYCLOAK_USER: ${KEYCLOAK_USER}
-      KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
-      KEYCLOAK_LOGLEVEL: ${KEYCLOAK_LOGLEVEL}
-      ROOT_LOGLEVEL: ${KEYCLOAK_ROOT_LOGLEVEL}
-      KEYCLOAK_IMPORT: ${KEYCLOAK_IMPORT}
-    depends_on:
-      - keycloak-db
-    networks:
-      - vc_authn_oidc
-
-  keycloak-db:
-    image: registry.access.redhat.com/rhscl/postgresql-10-rhel7:latest
-    environment:
-      POSTGRESQL_USER: ${KEYCLOAK_DB_USER}
-      POSTGRESQL_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
-      POSTGRESQL_DATABASE: ${KEYCLOAK_DB_NAME}
-    volumes:
-      - keycloak-db-data:/var/lib/pgsql/data
-    networks:
-      - vc_authn_oidc
+  
 
   aca-py:
     image: bcgovimages/aries-cloudagent:py36-1.11-1_0.3.2
