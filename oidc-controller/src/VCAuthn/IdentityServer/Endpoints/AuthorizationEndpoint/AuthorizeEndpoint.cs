@@ -96,7 +96,7 @@ namespace VCAuthn.IdentityServer.Endpoints
                 return VCResponseHelpers.Error(IdentityConstants.InvalidRedirectUriError);
             }
 
-           /*
+           
             if (clientResult.Client.RedirectUris.Any() && !clientResult.Client.RedirectUris.Contains(redirectUrl))
             
             {
@@ -110,7 +110,7 @@ namespace VCAuthn.IdentityServer.Endpoints
               _logger.LogDebug("Processing Authorize request-ISED err 2");
                return VCResponseHelpers.Error(IdentityConstants.InvalidRedirectUriError);
             }
-            */
+            
 
             var responseType = values.Get(IdentityConstants.ResponseTypeUriParameterName);
             if (string.IsNullOrEmpty(responseType))
