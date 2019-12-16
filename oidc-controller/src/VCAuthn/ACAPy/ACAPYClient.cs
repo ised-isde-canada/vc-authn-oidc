@@ -52,6 +52,7 @@ namespace VCAuthn.ACAPY
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri($"{_adminUrl}{ACAPYConstants.WalletDidPublicUri}")
+                  _logger.LogDebug("This is the request URI" +  RequestUri);
             };
 
             if (!string.IsNullOrEmpty(_adminUrlApiKey))
