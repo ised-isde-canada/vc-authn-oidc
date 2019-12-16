@@ -43,6 +43,7 @@ namespace VCAuthn.Controllers
         {
             if (!string.IsNullOrEmpty(_config.GetValue<string>("ApiKey")) && !string.Equals(_config.GetValue<string>("ApiKey"), apiKey))
             {
+             _logger.LogDebug($"nanda" + "-" + _config.GetValue<string>("ApiKey") + "-" + apiKey);
                 _logger.LogDebug($"Web hook operation un-authorized");
                 return Unauthorized();
             }
