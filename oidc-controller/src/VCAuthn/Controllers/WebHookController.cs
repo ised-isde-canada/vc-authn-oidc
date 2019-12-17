@@ -42,7 +42,7 @@ namespace VCAuthn.Controllers
 
         private async Task<ActionResult> ProcessWebhook(string apiKey, string topic, PresentationUpdate update)
         {
-            if (!string.IsNullOrEmpty(_config.GetValue<string>("ApiKey")) && !string.Equals(_config.GetValue<string>("ApiKey"), apiKey))
+           /* if (!string.IsNullOrEmpty(_config.GetValue<string>("ApiKey")) && !string.Equals(_config.GetValue<string>("ApiKey"), apiKey))
             {
              _logger.LogDebug($"nanda" + "-" + _config.GetValue<string>("ApiKey") + "-" + apiKey);
                 _logger.LogDebug($"Web hook operation un-authorized");
@@ -53,7 +53,7 @@ namespace VCAuthn.Controllers
             {
                 _logger.LogDebug($"Skipping webhook for topic [{topic}]");
                 return Ok();
-            }
+            }*/
 
             _logger.LogDebug($"Received web hook update object : {update.ToJson()}");
 
