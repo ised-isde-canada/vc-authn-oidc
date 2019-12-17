@@ -54,7 +54,7 @@ namespace VCAuthn.IdentityServer.Endpoints
         {
             _logger.LogDebug("Processing Authorize request");
             
-           _logger.LogDebug("Processing Authorize request for" + context.Request);
+           _logger.LogDebug("Processing Authorize request for" + context.Request.ToString());
 
             NameValueCollection values;
             switch (context.Request.Method)
@@ -164,6 +164,8 @@ namespace VCAuthn.IdentityServer.Endpoints
             try
             {
                 var url = string.Format("{0}?m={1}", _options.PublicOrigin, presentationRequest.ToJson().ToBase64());
+                
+                  _logger.LogError("This is the presentation url bhai" + url);
                 shortUrl = await _urlShortenerService.CreateShortUrlAsync(url);
             }
             catch (Exception e)
