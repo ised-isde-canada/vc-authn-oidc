@@ -39,6 +39,7 @@ namespace VCAuthn.Controllers
 
             if (authSession.PresentationRequestSatisfied == false)
             {
+            _logger.LogDebug($"presentation req not satisfied ..leno");
                 return BadRequest();
             }
 
