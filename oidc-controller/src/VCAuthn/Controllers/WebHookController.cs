@@ -42,12 +42,12 @@ namespace VCAuthn.Controllers
 
         private async Task<ActionResult> ProcessWebhook(string apiKey, string topic, PresentationUpdate update)
         {
-           /* if (!string.IsNullOrEmpty(_config.GetValue<string>("ApiKey")) && !string.Equals(_config.GetValue<string>("ApiKey"), apiKey))
+            if (!string.IsNullOrEmpty(_config.GetValue<string>("ApiKey")) && !string.Equals(_config.GetValue<string>("ApiKey"), apiKey))
             {
              _logger.LogDebug($"nanda" + "-" + _config.GetValue<string>("ApiKey") + "-" + apiKey);
                 _logger.LogDebug($"Web hook operation un-authorized");
                 return Unauthorized();
-            }*/
+            }
 
             if (string.Equals(ACAPYConstants.PresentationsTopic, topic, StringComparison.InvariantCultureIgnoreCase) == false)
             {
