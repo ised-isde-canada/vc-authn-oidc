@@ -30,6 +30,7 @@ namespace VCAuthn.Controllers
         [HttpPost("/{apiKey}/topic/{topic}")]
         public Task<ActionResult> GetTopicUpdateWithApiKey([FromRoute]string apiKey, [FromRoute]string topic, [FromBody]PresentationUpdate update)
         {
+           _logger.LogDebug($"nandaman" + "-" + _config.GetValue<string>("ApiKey") + "-" + apiKey);
             return ProcessWebhook(apiKey, topic, update);
         }
 
