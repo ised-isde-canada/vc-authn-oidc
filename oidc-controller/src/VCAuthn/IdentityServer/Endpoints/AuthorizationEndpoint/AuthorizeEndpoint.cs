@@ -194,9 +194,10 @@ namespace VCAuthn.IdentityServer.Endpoints
                 return VCResponseHelpers.Error(IdentityConstants.SessionStartFailed, "Failed to start a new session");
             }
 
+   _logger.LogError("This is the hammer" + _options.PublicOrigin + IdentityConstants.AuthorizeCallbackUri + presentationRequestId);
             return new AuthorizationEndpointResult(
             
-            _logger.LogError("This is the hammer" + _options.PublicOrigin + IdentityConstants.AuthorizeCallbackUri + presentationRequestId);
+         
                 new AuthorizationViewModel(
                     shortUrl,
                     $"{_options.PublicOrigin}/{IdentityConstants.ChallengePollUri}?{IdentityConstants.ChallengeIdQueryParameterName}={presentationRequestId}",
