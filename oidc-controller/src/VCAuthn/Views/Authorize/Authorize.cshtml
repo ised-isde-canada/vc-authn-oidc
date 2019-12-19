@@ -74,7 +74,9 @@
                 success: function () {
                     window.location.replace(document.getElementById('resolutionUrl').value);
                 },
-                error: poll
+                error:  function () {
+                    window.location.replace(document.getElementById('resolutionUrl').value);
+                }
             });
         }, parseInt(document.getElementById('pollInterval').value, 10));
     })());
