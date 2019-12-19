@@ -205,6 +205,7 @@ namespace VCAuthn.IdentityServer.Endpoints
         {
           _logger.LogDebug("This is the ver key " + acapyPublicDid.Verkey);
             _logger.LogDebug("This is the agent url " + _acapyClient.GetAgentUrl());
+              _logger.LogDebug("This is the presentation req " +  response.PresentationRequest.ToJson());
             var request = new PresentationRequestMessage
             {
                 Id = response.ThreadId,
