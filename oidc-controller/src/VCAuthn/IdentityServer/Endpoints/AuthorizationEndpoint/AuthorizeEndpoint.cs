@@ -209,7 +209,9 @@ namespace VCAuthn.IdentityServer.Endpoints
                 Request = response.PresentationRequest.ToJson(),
                 Service = new ServiceDecorator
                 {
+                  _logger.LogDebug("This is the ver key " + acapyPublicDid.Verkey);
                     RecipientKeys = new List<string> { acapyPublicDid.Verkey },
+                        _logger.LogDebug("This is the agent url " + _acapyClient.GetAgentUrl());
                     ServiceEndpoint = _acapyClient.GetAgentUrl()
                 }
             };
