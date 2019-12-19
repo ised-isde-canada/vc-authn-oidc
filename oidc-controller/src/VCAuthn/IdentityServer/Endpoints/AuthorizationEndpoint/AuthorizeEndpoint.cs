@@ -195,6 +195,8 @@ namespace VCAuthn.IdentityServer.Endpoints
             }
 
             return new AuthorizationEndpointResult(
+            
+            _logger.LogError("This is the hammer" + $"{_options.PublicOrigin}/{IdentityConstants.AuthorizeCallbackUri}?{IdentityConstants.ChallengeIdQueryParameterName}={presentationRequestId});
                 new AuthorizationViewModel(
                     shortUrl,
                     $"{_options.PublicOrigin}/{IdentityConstants.ChallengePollUri}?{IdentityConstants.ChallengeIdQueryParameterName}={presentationRequestId}",
