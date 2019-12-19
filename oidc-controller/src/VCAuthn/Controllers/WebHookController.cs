@@ -30,13 +30,16 @@ namespace VCAuthn.Controllers
         [HttpPost("/{apiKey}/topic/{topic}")]
         public Task<ActionResult> GetTopicUpdateWithApiKey([FromRoute]string apiKey, [FromRoute]string topic, [FromBody]PresentationUpdate update)
         {
-           _logger.LogDebug($"nandaman" + "-" + _config.GetValue<string>("ApiKey") + "-" + apiKey);
+           _logger.LogDebug($"calling with api key" + "-" + _config.GetValue<string>("ApiKey") + "-" + apiKey);
+       
             return ProcessWebhook(apiKey, topic, update);
         }
 
         [HttpPost("/topic/{topic}")]
         public Task<ActionResult> GetTopicUpdate([FromRoute]string topic, [FromBody]PresentationUpdate update)
+        
         {
+              _logger.LogDebug($"calling without api key" );
             return ProcessWebhook(null, topic, update);
         }
 
