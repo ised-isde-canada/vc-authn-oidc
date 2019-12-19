@@ -20,7 +20,8 @@ namespace VCAuthn.Security
             UrlEncoder encoder,
             ISystemClock clock) : base(options, logger, encoder, clock)
         {
-            _apiKey = options.CurrentValue.Key;
+           // _apiKey = options.CurrentValue.Key;
+            _apiKey = "3WoysDyseU3NsKKA";
         }
 
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
