@@ -162,9 +162,11 @@ namespace VCAuthn.IdentityServer.Endpoints
 
             // create a full and short url versions of a presentation requests
             string shortUrl;
+             string fullUrl;
             try
             {
                 var url = string.Format("{0}?m={1}", _options.PublicOrigin, presentationRequest.ToJson().ToBase64());
+                fullUrl =  string.Format("{0}?m={1}", _options.PublicOrigin, presentationRequest.ToJson().ToBase64());
                 
                   _logger.LogError("This is the presentation url bhai" + url);
                 shortUrl = await _urlShortenerService.CreateShortUrlAsync(url);
@@ -201,7 +203,7 @@ namespace VCAuthn.IdentityServer.Endpoints
             
          
                 new AuthorizationViewModel(
-                    shortUrl,
+                    fullUrl,
                     $"{_options.PublicOrigin}/{IdentityConstants.ChallengePollUri}?{IdentityConstants.ChallengeIdQueryParameterName}={presentationRequestId}",
                     $"{_options.PublicOrigin}/{IdentityConstants.AuthorizeCallbackUri}?{IdentityConstants.ChallengeIdQueryParameterName}={presentationRequestId}"));
         }
