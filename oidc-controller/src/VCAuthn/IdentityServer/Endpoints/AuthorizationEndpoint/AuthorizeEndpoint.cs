@@ -146,6 +146,7 @@ namespace VCAuthn.IdentityServer.Endpoints
 
             PresentationRequestMessage presentationRequest;
             string presentationRequestId;
+            // test
             try
             {
                 var response = await _acapyClient.CreatePresentationRequestAsync(presentationRecord.Configuration);
