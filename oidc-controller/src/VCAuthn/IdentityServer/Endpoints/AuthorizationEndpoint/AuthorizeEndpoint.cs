@@ -167,6 +167,7 @@ namespace VCAuthn.IdentityServer.Endpoints
                 
                   _logger.LogError("This is the presentation url bhai" + url);
                 shortUrl = await _urlShortenerService.CreateShortUrlAsync(url);
+                 _logger.LogError("This is the challenge bhai" +  shortUrl);
             }
             catch (Exception e)
             {
