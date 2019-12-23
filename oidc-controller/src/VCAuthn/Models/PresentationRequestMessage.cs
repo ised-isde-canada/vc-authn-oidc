@@ -11,7 +11,7 @@ namespace VCAuthn.Models
         [JsonProperty("@type")]
        // public string Type => "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/credential-presentation/0.1/presentation-request";
        // public string Type => "did:sov:HR6vs6GEZ8rHaVgjg2WodM;spec/credential-presentation/0.1/presentation-request";
-        public string Type => "did:sov:NewAUq29E4jLJ5jMSxns3s;spec/credential-presentation/0.1/presentation-request";
+        public string Type => "did:sov:CiVDBhLFMCMtvF9QyaSePA;spec/credential-presentation/0.1/presentation-request";
 
         [JsonProperty("request")]
         public string Request { get; set; }
