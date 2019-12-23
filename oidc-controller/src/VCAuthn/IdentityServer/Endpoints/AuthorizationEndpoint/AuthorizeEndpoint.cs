@@ -203,7 +203,7 @@ namespace VCAuthn.IdentityServer.Endpoints
             
          
                 new AuthorizationViewModel(
-                    fullUrl,
+                     shortUrl,
                     $"{_options.PublicOrigin}/{IdentityConstants.ChallengePollUri}?{IdentityConstants.ChallengeIdQueryParameterName}={presentationRequestId}",
                     $"{_options.PublicOrigin}/{IdentityConstants.AuthorizeCallbackUri}?{IdentityConstants.ChallengeIdQueryParameterName}={presentationRequestId}"));
         }
