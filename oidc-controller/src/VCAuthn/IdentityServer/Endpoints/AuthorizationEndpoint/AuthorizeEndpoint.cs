@@ -169,7 +169,7 @@ namespace VCAuthn.IdentityServer.Endpoints
                 fullUrl =  string.Format("{0}?m={1}", _options.PublicOrigin, presentationRequest.ToJson().ToBase64());
                 
                   _logger.LogError("This is the presentation url bhai" + url);
-                shortUrl = await _urlShortenerService.CreateShortUrlAsync(url);
+                   shortUrl = await _urlShortenerService.CreateShortUrlAsync(url);
                  _logger.LogError("This is the challenge bhai" +  shortUrl);
             }
             catch (Exception e)
