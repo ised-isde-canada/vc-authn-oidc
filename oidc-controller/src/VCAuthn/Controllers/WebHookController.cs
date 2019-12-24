@@ -30,16 +30,12 @@ namespace VCAuthn.Controllers
         [HttpPost("/{apiKey}/topic/{topic}")]
         public Task<ActionResult> GetTopicUpdateWithApiKey([FromRoute]string apiKey, [FromRoute]string topic, [FromBody]PresentationUpdate update)
         {
-           _logger.LogDebug($"calling with api key" + "-" + _config.GetValue<string>("ApiKey") + "-" + apiKey);
-       
             return ProcessWebhook(apiKey, topic, update);
         }
 
         [HttpPost("/topic/{topic}")]
         public Task<ActionResult> GetTopicUpdate([FromRoute]string topic, [FromBody]PresentationUpdate update)
-        
         {
-              _logger.LogDebug($"calling without api key" );
             return ProcessWebhook(null, topic, update);
         }
 
@@ -47,7 +43,6 @@ namespace VCAuthn.Controllers
         {
             if (!string.IsNullOrEmpty(_config.GetValue<string>("ApiKey")) && !string.Equals(_config.GetValue<string>("ApiKey"), apiKey))
             {
-             _logger.LogDebug($"nanda" + "-" + _config.GetValue<string>("ApiKey") + "-" + apiKey);
                 _logger.LogDebug($"Web hook operation un-authorized");
                 return Unauthorized();
             }
@@ -64,6 +59,7 @@ namespace VCAuthn.Controllers
             {
                 if (update.State != ACAPYConstants.SuccessfulPresentationUpdate)
                 {
+                    _logger.LogDebug($"Presentation Request not yet received, state is [{update.State}]");
                     return Ok();
                 }
 

@@ -53,8 +53,6 @@ namespace VCAuthn.IdentityServer.Endpoints
         public async Task<IEndpointResult> ProcessAsync(HttpContext context)
         {
             _logger.LogDebug("Processing Authorize request");
-            
-           _logger.LogDebug("Processing Authorize request for" + context.Request.ToString());
 
             NameValueCollection values;
             switch (context.Request.Method)
@@ -94,25 +92,13 @@ namespace VCAuthn.IdentityServer.Endpoints
             var redirectUrl = values.Get(IdentityConstants.RedirectUriParameterName);
             if (string.IsNullOrEmpty(redirectUrl))
             {
-            	 _logger.LogDebug("Processing Authorize request-ISED err 1");
                 return VCResponseHelpers.Error(IdentityConstants.InvalidRedirectUriError);
             }
 
-           
             if (clientResult.Client.RedirectUris.Any() && !clientResult.Client.RedirectUris.Contains(redirectUrl))
-            
             {
-              _logger.LogDebug("this is the redirectURL" + redirectUrl);
-            
-              foreach(var item in clientResult.Client.RedirectUris)
-              {
-                
-                  _logger.LogDebug("this is the url " + item.ToString());
-              }
-              _logger.LogDebug("Processing Authorize request-ISED err 2");
-               return VCResponseHelpers.Error(IdentityConstants.InvalidRedirectUriError);
+                return VCResponseHelpers.Error(IdentityConstants.InvalidRedirectUriError);
             }
-            
 
             var responseType = values.Get(IdentityConstants.ResponseTypeUriParameterName);
             if (string.IsNullOrEmpty(responseType))
@@ -146,7 +132,6 @@ namespace VCAuthn.IdentityServer.Endpoints
 
             PresentationRequestMessage presentationRequest;
             string presentationRequestId;
-            // test
             try
             {
                 var response = await _acapyClient.CreatePresentationRequestAsync(presentationRecord.Configuration);
@@ -162,15 +147,10 @@ namespace VCAuthn.IdentityServer.Endpoints
 
             // create a full and short url versions of a presentation requests
             string shortUrl;
-             string fullUrl;
             try
             {
                 var url = string.Format("{0}?m={1}", _options.PublicOrigin, presentationRequest.ToJson().ToBase64());
-                fullUrl =  string.Format("{0}?m={1}", _options.PublicOrigin, presentationRequest.ToJson().ToBase64());
-                
-                  _logger.LogError("This is the presentation url bhai" + url);
-                   shortUrl = await _urlShortenerService.CreateShortUrlAsync(url);
-                 _logger.LogError("This is the challenge bhai" +  shortUrl);
+                shortUrl = await _urlShortenerService.CreateShortUrlAsync(url);
             }
             catch (Exception e)
             {
@@ -185,7 +165,7 @@ namespace VCAuthn.IdentityServer.Endpoints
                 {
                     PresentationRequestId = presentationRequestId,
                     PresentationRecordId = presentationRecordId,
-                    PresentationRequest = presentationRequest.Request,
+                    PresentationRequest = presentationRequest.Request.ExtractIndyPresentationPequest().ToJson(),
                     RequestParameters = values.AllKeys.ToDictionary(t => t, t => values[t])
                 });
 
@@ -198,30 +178,22 @@ namespace VCAuthn.IdentityServer.Endpoints
                 return VCResponseHelpers.Error(IdentityConstants.SessionStartFailed, "Failed to start a new session");
             }
 
-   _logger.LogError("This is the hammer" + _options.PublicOrigin + IdentityConstants.AuthorizeCallbackUri + presentationRequestId);
             return new AuthorizationEndpointResult(
-            
-         
                 new AuthorizationViewModel(
-                     shortUrl,
+                    shortUrl,
                     $"{_options.PublicOrigin}/{IdentityConstants.ChallengePollUri}?{IdentityConstants.ChallengeIdQueryParameterName}={presentationRequestId}",
                     $"{_options.PublicOrigin}/{IdentityConstants.AuthorizeCallbackUri}?{IdentityConstants.ChallengeIdQueryParameterName}={presentationRequestId}"));
         }
 
         private PresentationRequestMessage BuildPresentationRequest(CreatePresentationResponse response, WalletPublicDid acapyPublicDid)
         {
-          _logger.LogDebug("This is the ver key " + acapyPublicDid.Verkey);
-            _logger.LogDebug("This is the agent url " + _acapyClient.GetAgentUrl());
-              _logger.LogDebug("This is the presentation req " +  response.PresentationRequest.ToJson());
             var request = new PresentationRequestMessage
             {
                 Id = response.ThreadId,
-                Request = response.PresentationRequest.ToJson(),
+                Request = response.PresentationRequest.GeneratePresentationAttachments(),
                 Service = new ServiceDecorator
                 {
-                
                     RecipientKeys = new List<string> { acapyPublicDid.Verkey },
-                      
                     ServiceEndpoint = _acapyClient.GetAgentUrl()
                 }
             };
