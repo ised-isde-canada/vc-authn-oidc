@@ -94,6 +94,7 @@ namespace VCAuthn.ACAPY
                     httpContent.Headers.Add(ACAPYConstants.ApiKeyHeader, _adminUrlApiKey);
                 }
 
+   _logger.LogDebug("aDMIN url:" + _adminUrl);
                 var response = await _httpClient.PostAsync($"{_adminUrl}{ACAPYConstants.PresentProofCreateRequest}", httpContent);
                 var responseContent = await response.Content.ReadAsStringAsync();
 
