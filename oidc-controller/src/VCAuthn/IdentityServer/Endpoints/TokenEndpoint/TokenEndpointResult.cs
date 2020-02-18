@@ -46,6 +46,7 @@ namespace VCAuthn.IdentityServer.Endpoints
                 var token = await _tokenIssuerService.IssueJwtAsync(10000, issuer, new string[] { audience }, await GetClaims());
 
                 _logger.LogDebug($"Token created, invalidating session");
+                _logger.LogDebug($"Token created ISED, invalidating session : {token}");
 
                 if (_sessionStorage.DeleteSession(_session) == false)
                 {
